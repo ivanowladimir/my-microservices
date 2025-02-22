@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - PreserveHostHeader
+      routes:
+        - id: user-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/users/**
+        - id: credit-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/credits/**
+          filters:
+            - StripPrefix=1
+        - id: user-service-auth
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/auth/**
+
+
+jwt:
+  secret: "dGhpcy1pcy1hLXNlY3JldC1rZXktZm9yLWp3dC1hdXRoZW50aWNhdGlvbi0xMjM0NTY3OAo="
+  expiration: 86400000 # 24 часа
+
+logging:
+  level:
+    ru.ivanov.apigateway: DEBUG

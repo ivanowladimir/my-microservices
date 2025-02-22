@@ -1,0 +1,13 @@
+[33m9cf7bd2[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m HEAD@{0}: reset: moving to 9cf7bd2648a7e64f6c61afa261e094c9846d709d
+[33mc19e663[m HEAD@{1}: rebase (abort): returning to refs/heads/master
+[33mc19e663[m HEAD@{2}: rebase (abort): returning to refs/heads/master
+[33mc19e663[m HEAD@{3}: commit: update 8 запросы передаются
+[33mf1af772[m HEAD@{4}: commit: update 7 запросы передаются
+[33m5fbb28a[m HEAD@{5}: commit: update 6
+[33mf0a0bec[m HEAD@{6}: commit: update 5
+[33m7dd1276[m HEAD@{7}: commit: update 4
+[33m96d9bc2[m HEAD@{8}: commit: update 3
+[33m615a829[m HEAD@{9}: commit: update 2
+[33m9cf7bd2[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m HEAD@{10}: commit: update 2
+[33mee6e5d2[m HEAD@{11}: commit: update
+[33m3c9c4f6[m HEAD@{12}: commit (initial): create

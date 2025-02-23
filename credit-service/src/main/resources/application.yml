@@ -29,3 +29,10 @@ feign:
 jwt:
   secret: "dGhpcy1pcy1hLXNlY3JldC1rZXktZm9yLWp3dC1hdXRoZW50aWNhdGlvbi0xMjM0NTY3OAo="
   expiration: 86400000 # 24 часа
+
+logging:
+  level:
+    ru.ivanov.creditservice: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE

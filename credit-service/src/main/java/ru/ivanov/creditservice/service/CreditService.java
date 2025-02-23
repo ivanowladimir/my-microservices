@@ -3,10 +3,10 @@ package ru.ivanov.creditservice.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.ivanov.creditservice.dto.CreditRequestDTO;
 import ru.ivanov.creditservice.entity.CreditRequest;
 import ru.ivanov.creditservice.repository.CreditRepository;
-import ru.ivanov.creditservice.security.JwtUtil;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,18 +16,10 @@ import java.util.List;
 @Slf4j
 public class CreditService {
     private final CreditRepository creditRepository;
-    private final JwtUtil jwtUtil; // Внедряем JwtUtil
 
-    public CreditRequest createCreditRequest(CreditRequestDTO requestDTO, String token) {
-        log.info("Создание заявки на кредит. Запрос: {}", requestDTO);
-
-        String userId;
-        try {
-            userId = jwtUtil.extractUserId(token); // Получаем ID пользователя из токена
-        } catch (Exception e) {
-            log.error("Ошибка при извлечении userId из токена: {}", e.getMessage());
-            throw new RuntimeException("Невалидный токен");
-        }
+    @Transactional
+    public CreditRequest processCreditRequest(String userId, CreditRequestDTO requestDTO) {
+        log.info("Обработка заявки на кредит для userId: {}", userId);
 
         CreditRequest creditRequest = CreditRequest.builder()
                 .userId(userId)
@@ -37,20 +29,11 @@ public class CreditService {
                 .createdAt(LocalDateTime.now())
                 .build();
 
-        CreditRequest savedRequest = creditRepository.save(creditRequest);
-        log.info("Кредитная заявка успешно создана: {}", savedRequest);
-        return savedRequest;
-    }
-
-    public CreditRequest processCreditRequest(String userId, CreditRequest creditRequest) {
-        log.info("Обработка заявки на кредит для userId: {}", userId);
-
-        creditRequest.setUserId(userId);
-        creditRequest.setStatus("PENDING");
-        creditRequest.setCreatedAt(LocalDateTime.now());
+        log.info("Создана кредитная заявка: {}", creditRequest);
 
         CreditRequest savedRequest = creditRepository.save(creditRequest);
-        log.info("Заявка успешно сохранена: {}", savedRequest);
+
+        log.info("Кредитная заявка успешно сохранена в БД: {}", savedRequest);
 
         return savedRequest;
     }

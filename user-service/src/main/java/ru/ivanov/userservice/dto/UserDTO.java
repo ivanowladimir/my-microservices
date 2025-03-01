@@ -23,17 +23,29 @@ public class UserDTO {
     @NotBlank(message = "Email is required")
     private String email;
 
-    @NotBlank(message = "Full name is required")
-    @Size(min = 3, max = 50, message = "Full name must be 3-50 characters")
-    private String fullName;
-
-    @Past(message = "Birth date must be in the past")
+    // Личные данные
+    private String lastName;
+    private String firstName;
+    private String middleName;
     private LocalDate birthDate;
+    private String birthPlace;
 
-    @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "Invalid phone number")
+    // Контактные данные
     private String phone;
+    private boolean contactIsActive;
 
-    @NotBlank(message = "Address is required")
-    @Size(max = 255, message = "Address cannot exceed 255 characters")
-    private String address;
+    // Адрес
+    private String country;
+    private String city;
+    private String street;
+    private String house;
+    private boolean addressIsActive;
+
+    // Документ
+    private String documentType;
+    private String series;
+    private String number;
+    private String issuedBy;
+    private String issuedDate;
+    private boolean documentIsActive;
 }

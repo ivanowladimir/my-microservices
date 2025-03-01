@@ -11,7 +11,8 @@ public class UserContact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String phone;
+    private String phone;     // Телефон
+    private boolean isActive; // Актуальность контакта
 
     @OneToOne
     @JoinColumn(name = "user_main_id")

@@ -1,18 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
-             xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
-             xmlns:camunda="http://camunda.org/schema/1.0/bpmn"
-             targetNamespace="http://bpmn.io/schema/bpmn">
-
-    <bpmn:process id="credit_process" name="Credit Approval Process" isExecutable="true" camunda:historyTimeToLive="180">
-        <bpmn:startEvent id="start" name="Start Process"/>
-
-        <bpmn:serviceTask id="fetchRequest" name="Fetch Credit Request" camunda:class="com.example.camunda.delegates.FetchRequestTask"/>
-        <bpmn:serviceTask id="fsspCheck" name="FSSP Check" camunda:class="com.example.camunda.delegates.FsspCheckTask"/>
-        <bpmn:serviceTask id="kbCheck" name="KB Check" camunda:class="com.example.camunda.delegates.KbCheckTask"/>
-        <bpmn:serviceTask id="sendToConfirmation" name="Send to Confirmation Service" camunda:class="com.example.camunda.delegates.ConfirmationTask"/>
-
-        <bpmn:endEvent id="end" name="Process Completed"/>
-    </bpmn:process>
-
-</definitions>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.32.0">
+  <bpmn:process id="credit_process" name="Credit Approval Process" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="start" name="Start Process">
+      <bpmn:outgoing>Flow_01ee7n3</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="fetchRequest" name="Fetch Credit Request" camunda:class="ru.ivanov.camundaservice.delegates.FetchRequestTask">
+      <bpmn:incoming>Flow_01ee7n3</bpmn:incoming>
+      <bpmn:outgoing>Flow_1f5gu7q</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="fsspCheck" name="FSSP Check" camunda:class="ru.ivanov.camundaservice.delegates.FsspCheckTask">
+      <bpmn:incoming>Flow_1f5gu7q</bpmn:incoming>
+      <bpmn:outgoing>Flow_1d1x6mk</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="kbCheck" name="KB Check" camunda:class="ru.ivanov.camundaservice.delegates.KbCheckTask">
+      <bpmn:incoming>Flow_1d1x6mk</bpmn:incoming>
+      <bpmn:outgoing>Flow_05c9yo2</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="sendToConfirmation" name="Send to Confirmation Service" camunda:class="ru.ivanov.camundaservice.delegates.ConfirmationTask">
+      <bpmn:incoming>Flow_05c9yo2</bpmn:incoming>
+      <bpmn:outgoing>Flow_0hadka5</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="end" name="Process Completed">
+      <bpmn:incoming>Flow_0hadka5</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_01ee7n3" sourceRef="start" targetRef="fetchRequest" />
+    <bpmn:sequenceFlow id="Flow_1f5gu7q" sourceRef="fetchRequest" targetRef="fsspCheck" />
+    <bpmn:sequenceFlow id="Flow_1d1x6mk" sourceRef="fsspCheck" targetRef="kbCheck" />
+    <bpmn:sequenceFlow id="Flow_05c9yo2" sourceRef="kbCheck" targetRef="sendToConfirmation" />
+    <bpmn:sequenceFlow id="Flow_0hadka5" sourceRef="sendToConfirmation" targetRef="end" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="credit_process">
+      <bpmndi:BPMNShape bpmnElement="fetchRequest">
+        <dc:Bounds x="250" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="fsspCheck">
+        <dc:Bounds x="400" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="kbCheck">
+        <dc:Bounds x="550" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sendToConfirmation">
+        <dc:Bounds x="700" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="end">
+        <dc:Bounds x="850" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="841" y="158" width="54" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="start">
+        <dc:Bounds x="172" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="157" y="158" width="67" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_01ee7n3_di" bpmnElement="Flow_01ee7n3">
+        <di:waypoint x="208" y="140" />
+        <di:waypoint x="250" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1f5gu7q_di" bpmnElement="Flow_1f5gu7q">
+        <di:waypoint x="350" y="140" />
+        <di:waypoint x="400" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1d1x6mk_di" bpmnElement="Flow_1d1x6mk">
+        <di:waypoint x="500" y="140" />
+        <di:waypoint x="550" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05c9yo2_di" bpmnElement="Flow_05c9yo2">
+        <di:waypoint x="650" y="140" />
+        <di:waypoint x="700" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hadka5_di" bpmnElement="Flow_0hadka5">
+        <di:waypoint x="800" y="140" />
+        <di:waypoint x="850" y="140" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

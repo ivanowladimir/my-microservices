@@ -13,14 +13,17 @@ public class ConfirmationService {
     private final LoanClient loanClient;
 
     public void processCreditRequest(CreditRequestDTO request) {
-        log.info("Обработка запроса на кредит: {}", request);
+        log.info("Обработка заявки: {}", request);
 
+        //Принимаем решение на основе ФССП и КБ
         boolean approved = request.isFsspCheckPassed() && request.isKbCheckPassed();
         String status = approved ? "APPROVED" : "REJECTED";
 
-        LoanDecisionDTO message = new LoanDecisionDTO(request.getUserId(), status);
-        loanClient.sendLoanDecision(message);
+        LoanDecisionDTO decision = new LoanDecisionDTO(request.getUserId(), status);
 
-        log.info("Решение {} отправлено в LoanService", status);
+        //Отправляем решение в LoanService
+        loanClient.sendLoanDecision(decision);
+
+        log.info("Решение '{}' отправлено в LoanService для userId: {}", status, request.getUserId());
     }
 }

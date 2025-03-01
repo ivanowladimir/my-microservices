@@ -17,7 +17,12 @@ public class LoanClient {
     private String loanServiceUrl;
 
     public void sendLoanDecision(LoanDecisionDTO message) {
-        log.info("Отправка HTTP-запроса в LoanService: {}", message);
-        restTemplate.postForObject(loanServiceUrl, message, String.class);
+        try {
+            log.info("Отправка решения в LoanService: {}", message);
+            restTemplate.postForObject(loanServiceUrl, message, String.class);
+            log.info("Решение успешно отправлено в LoanService.");
+        } catch (Exception e) {
+            log.error("Ошибка отправки решения в LoanService: {}", e.getMessage(), e);
+        }
     }
 }

@@ -11,7 +11,11 @@ public class UserAddress {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String address;
+    private String country;   // Страна
+    private String city;      // Город
+    private String street;    // Улица
+    private String house;     // Дом
+    private boolean isActive; // Актуальность адреса
 
     @OneToOne
     @JoinColumn(name = "user_main_id")

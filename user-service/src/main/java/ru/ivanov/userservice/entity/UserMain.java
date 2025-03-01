@@ -22,14 +22,18 @@ public class UserMain {
     private String email;
 
     @OneToOne(mappedBy = "userMain", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore  // Отключает сериализацию userPersonal в JSON
+    @JsonIgnore
     private UserPersonal userPersonal;
 
     @OneToOne(mappedBy = "userMain", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore  // Отключает сериализацию userContact в JSON
+    @JsonIgnore
     private UserContact userContact;
 
     @OneToOne(mappedBy = "userMain", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore  // Отключает сериализацию userAddress в JSON
+    @JsonIgnore
     private UserAddress userAddress;
+
+    @OneToOne(mappedBy = "userMain", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private UserDocument userDocument;
 }

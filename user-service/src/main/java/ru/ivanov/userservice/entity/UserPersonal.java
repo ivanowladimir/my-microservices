@@ -13,8 +13,11 @@ public class UserPersonal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String fullName;
-    private LocalDate birthDate;
+    private String lastName;      // Фамилия
+    private String firstName;     // Имя
+    private String middleName;    // Отчество
+    private LocalDate birthDate;  // Дата рождения
+    private String birthPlace;    // Место рождения
 
     @OneToOne
     @JoinColumn(name = "user_main_id")

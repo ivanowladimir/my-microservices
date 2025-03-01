@@ -2,4 +2,7 @@
     <module>user-service</module>
     <module>credit-service</module>
     <module>api-gateway</module>
+    <module>camunda-service</module>
+    <module>confirmation-service</module>
+    <module>loan-service</module>
 </modules>

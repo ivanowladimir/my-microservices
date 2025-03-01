@@ -15,7 +15,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return User.builder()
                 .username(username)
-                .password("")  // Пароль не используется в Credit Service, так как аутентификация идёт по токену
+                .password("")  // Пароль не используется, так как аутентификация идёт по токену
                 .roles("USER")  // Назначаем роль "USER"
                 .build();
     }

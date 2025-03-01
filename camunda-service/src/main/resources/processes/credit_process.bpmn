@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:camunda="http://camunda.org/schema/1.0/bpmn"
+             targetNamespace="http://bpmn.io/schema/bpmn">
+
+    <bpmn:process id="credit_process" name="Credit Approval Process" isExecutable="true" camunda:historyTimeToLive="180">
+        <bpmn:startEvent id="start" name="Start Process"/>
+
+        <bpmn:serviceTask id="fetchRequest" name="Fetch Credit Request" camunda:class="com.example.camunda.delegates.FetchRequestTask"/>
+        <bpmn:serviceTask id="fsspCheck" name="FSSP Check" camunda:class="com.example.camunda.delegates.FsspCheckTask"/>
+        <bpmn:serviceTask id="kbCheck" name="KB Check" camunda:class="com.example.camunda.delegates.KbCheckTask"/>
+        <bpmn:serviceTask id="sendToConfirmation" name="Send to Confirmation Service" camunda:class="com.example.camunda.delegates.ConfirmationTask"/>
+
+        <bpmn:endEvent id="end" name="Process Completed"/>
+    </bpmn:process>
+
+</definitions>

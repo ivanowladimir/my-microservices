@@ -1,0 +1,9 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: confirmation-service
+
+loan-service:
+  url: http://localhost:8085/api/loan/decision

@@ -11,6 +11,8 @@ import java.math.BigDecimal;
 @Builder
 public class CreditRequestDTO {
 
+    private String userId;
+
     @Min(value = 1, message = "Сумма кредита должна быть больше 0")
     private BigDecimal amount;
 

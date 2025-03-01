@@ -7,9 +7,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="credit-service" />
         <module name="my-microservices" />
         <module name="user-service" />
+        <module name="confirmation-service" />
+        <module name="camunda-service" />
+        <module name="credit-service" />
+        <module name="loan-service" />
       </profile>
       <profile name="Annotation profile for api-gateway" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -28,8 +31,11 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
+      <module name="camunda-service" options="-parameters" />
+      <module name="confirmation-service" options="-parameters" />
       <module name="credit-service" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
+      <module name="loan-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>

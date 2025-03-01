@@ -22,7 +22,7 @@ public class CreditController {
     private final JwtUtil jwtUtil;
 
     @PostMapping("/apply")
-    public ResponseEntity<String> applyForCredit(
+    public ResponseEntity<?> applyForCredit(
             @RequestHeader("Authorization") String authHeader,
             @RequestBody @Valid CreditRequestDTO creditRequestDTO) {
 
@@ -33,11 +33,14 @@ public class CreditController {
 
         log.info("Извлечённый userId из токена: {}", userId);
 
-        creditService.processCreditRequest(userId, creditRequestDTO);
-
-        log.info("Кредитная заявка успешно обработана для userId: {}", userId);
-
-        return ResponseEntity.ok("Кредитная заявка отправлена!");
+        try {
+            CreditRequest creditRequest = creditService.processCreditRequest(userId, creditRequestDTO);
+            log.info("Кредитная заявка успешно обработана для userId: {}", userId);
+            return ResponseEntity.ok(creditRequest);
+        } catch (IllegalStateException e) {
+            log.warn("Ошибка: {}", e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping("/user")

@@ -14,9 +14,7 @@ spring:
         - id: credit-service
           uri: http://localhost:8082
           predicates:
-            - Path=/api/credits/**
-          filters:
-            - StripPrefix=1
+            - Path=/credit/**
         - id: user-service-auth
           uri: http://localhost:8081
           predicates:
@@ -29,4 +27,7 @@ jwt:
 
 logging:
   level:
-    ru.ivanov.apigateway: DEBUG
+    root: INFO
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG

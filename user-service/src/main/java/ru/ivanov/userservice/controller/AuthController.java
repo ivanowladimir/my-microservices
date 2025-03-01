@@ -23,7 +23,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDTO> login(@RequestBody @Valid AuthRequestDTO request) {
-        //System.out.println("User Service: Запрос на логин от {}" + request.getUsername());
         log.info("User Service: Запрос на логин от {}", request.getUsername());
 
         Authentication authentication = authenticationManager.authenticate(
@@ -31,7 +30,6 @@ public class AuthController {
         );
 
         String jwt = jwtUtils.generateToken((UserDetails) authentication.getPrincipal());
-        //System.out.println("User Service: Логин успешен, токен сгенерирован");
         log.info("User Service: Логин успешен, токен сгенерирован");
 
         return ResponseEntity.ok(new AuthResponseDTO(jwt, "Успешная аутентификация", request.getUsername()));

@@ -16,10 +16,10 @@ public class CreditRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String userId;   // ID пользователя из User Service
+    private String userId;      // ID пользователя из User Service
     private BigDecimal amount;  // Сумма кредита
-    private int term;  // Срок кредита в месяцах
-    private String status; // "PENDING", "APPROVED", "REJECTED"
+    private int term;           // Срок кредита в месяцах
+    private String status;      // "PENDING", "APPROVED", "REJECTED"
 
     private LocalDateTime createdAt;
 }

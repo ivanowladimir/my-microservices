@@ -11,7 +11,7 @@ public class UserDocument {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String documentType;  // Тип документа (паспорт, ВУ и т. д.)
+    private String documentType;  // Тип документа
     private String series;        // Серия
     private String number;        // Номер
     private String issuedBy;      // Кем выдано

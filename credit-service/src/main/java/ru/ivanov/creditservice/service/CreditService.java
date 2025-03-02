@@ -40,13 +40,21 @@ public class CreditService {
                 .term(requestDTO.getTerm())
                 .status("PENDING")
                 .createdAt(LocalDateTime.now())
+                .lastName(requestDTO.getLastName())
+                .firstName(requestDTO.getFirstName())
+                .middleName(requestDTO.getMiddleName())
+                .documentType(requestDTO.getDocumentType())
+                .documentSeries(requestDTO.getDocumentSeries())
+                .documentNumber(requestDTO.getDocumentNumber())
+                .documentIssuedBy(requestDTO.getDocumentIssuedBy())
+                .documentIssuedDate(requestDTO.getDocumentIssuedDate())
                 .build();
 
         creditRepository.save(creditRequest);
         log.info("Кредитная заявка сохранена: {}", creditRequest);
 
         requestDTO.setUserId(userId);
-        //Отправляем данные в CamundaService
+        // Отправляем данные в CamundaService
         camundaClient.startProcess(requestDTO);
         log.info("Процесс в CamundaService запущен для userId: {}", userId);
 

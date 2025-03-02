@@ -18,4 +18,14 @@ public class CreditRequestDTO {
 
     @Min(value = 1, message = "Срок кредита должен быть больше 0 месяцев")
     private int term;
+
+    // Добавляем поля для ФИО и данных документа
+    private String lastName; // Фамилия
+    private String firstName; // Имя
+    private String middleName; // Отчество
+    private String documentType; // Тип документа
+    private String documentSeries; // Серия документа
+    private String documentNumber; // Номер документа
+    private String documentIssuedBy; // Кем выдан документ
+    private String documentIssuedDate; // Дата выдачи документа
 }
